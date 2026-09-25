@@ -41,3 +41,11 @@ This is a Python project that implements gait analysis using 3D kinematic data o
     pip install - r requirements.txt
     ```
 3. Select the walking velocity being analyzed in `main.py` then run it
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any questions or inquiries, please feel free to contact [Máté Unger](mailto:mate.unger@med.uni-muenchen.de).
