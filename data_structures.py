@@ -30,8 +30,7 @@ gait_analysis_properties = {
         "max_gap_interpolation": 0.25,
         "filter_cutoff": 2,
         "filter_order": 4,
-        "heel_thr": 0.8,
-        "toe_thr": 0.8,
+        "ankle_thr": 0.8,
         "stride_time_min": 0.65,
         "stride_time_max": 2.5,
         "swing_time_min": 0.3,
@@ -42,8 +41,7 @@ gait_analysis_properties = {
         "max_gap_interpolation": 0.25,
         "filter_cutoff": 7,
         "filter_order": 4,
-        "heel_thr": 0.8,
-        "toe_thr": 0.8,
+        "ankle_thr": 0.8,
         "stride_time_min": 0.65,
         "stride_time_max": 2.5,
         "swing_time_min": 0.3,
@@ -380,8 +378,7 @@ class Recording:
         recording_type: type of the system used to obtain the keypoint data (stereo/qualisys
         gait_analysis_properties: properties used for GE detection and preprocessing
         fps: sampling frequency in Hz
-        heel_thr: velocity threshold below which the heel keypoint is considered stationary
-        toe_thr: velocity threshold below which the big_toe keypoint is considered stationary
+        ankle_thr: velocity threshold below which the ankle keypoint is considered stationary
         max_stride_time: maximum time below which a stride sequence is considered valid
         min_swing_time: minimal time above which a swing phase is considered valid
         min_stance_time: minaimal time above which a stance phase is considered valid
@@ -414,8 +411,7 @@ class Recording:
         gait_analysis_properties = gait_analysis_properties[self.recording_type]
         self.fps = gait_analysis_properties["fps"]
 
-        self.heel_thr = gait_analysis_properties["heel_thr"]
-        self.toe_thr = gait_analysis_properties["toe_thr"]
+        self.ankle_thr = gait_analysis_properties["ankle_thr"]
 
         self.max_stride_time = gait_analysis_properties["stride_time_max"] * self.fps
         self.min_swing_time = gait_analysis_properties["swing_time_min"] * self.fps
@@ -630,9 +626,8 @@ class Recording:
         return (turn_mask, perspective, segment_idices, segment_boundaries)
 
     def get_gait_events(self, velocity, create_debug_fig: bool = False):
-        heel_thr = self.heel_thr * velocity
-        ankle_thr = self.heel_thr * velocity
-        big_toe_thr = self.toe_thr * velocity
+
+        ankle_thr = self.ankle_thr * velocity
 
         all_events = []
 
